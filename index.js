@@ -1,6 +1,7 @@
 var backgroundImg;
 var ghostImg;
 var ghost;
+var GRAVITY = 0.2;
 
 function preload(){
 ghostImg= loadImage('images/NicePng_ghost-png_17668.png');
@@ -13,6 +14,7 @@ function setup() {
   createCanvas(400,600);
   ghost = createSprite(width/2, height/2, 10, 10);
   ghost.addImage(ghostImg);
+
   //create a sprite with a placeholder rectangle as visual component
   //tempGhost = createSprite(100, 150, 50, 100);
   //change the color of the placeholder
@@ -23,4 +25,6 @@ function draw() {
   // put drawing code here
   background(backgroundImg);
   drawSprites();
+  ghost.velocity.y += GRAVITY;
+
 }
