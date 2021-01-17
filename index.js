@@ -4,9 +4,9 @@ var ghost;
 var GRAVITY = 0.2;
 var CANVAS_HEIGHT=600;
 var CANVAS_WIDTH=400;
-var MIN_OPENING = 300;
+var MIN_OPENING = 50;
 var obstacle;
-var obstacles;
+var topobstacle;
 var obstacleImg;
 
 function preload(){
@@ -37,15 +37,23 @@ function draw() {
   if(ghost.position.y+ghost.height/2 > CANVAS_HEIGHT){
     ghost.velocity.y = -1 ;
   }
-   //spawn pipes
-   //todo
+
+
+   //obstacles
    if(frameCount%60 == 0) {
-    randomH = random(50,300);
+    randomH = random(100,400);
     obstacle = createSprite(ghost.position.x+width,CANVAS_HEIGHT-randomH/2+1+100, 80, randomH);
     obstacle.addImage(obstacleImg);
-    obstacles.add(obstacle);
-  
-   }
+    obstacle.velocity.x = -2;
+    obstacle.mirrorY(-1);
+  //top
+    var topHeight = height - (height-CANVAS_HEIGHT)-(randomH+MIN_OPENING);
+    topobstacle = createSprite(ghost.position.x+width,topHeight/2-100,80, randomH)
+    topobstacle.addImage(obstacleImg);
+    topobstacle.velocity.x = -2;
+  }
+
+
   camera.position.x = ghost.position.x + width/4;
   camera.off();
   camera.on();
